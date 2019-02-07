@@ -7,6 +7,13 @@ import './layout.css'
 import Archive from './archive'
 import { Spring } from 'react-spring/renderprops'
 
+/**
+* Better comments
+* * Green
+* ! Red
+* ? BLue
+* @param test
+ */
 const Layout = ({ children, location = {} }) => (
   <StaticQuery
     query={graphql`
@@ -32,12 +39,18 @@ const Layout = ({ children, location = {} }) => (
       <>
         <Header siteTitle={data.site.siteMetadata.title}/>
         <Spring
-          from={{ height: location.pathname === '/' ? 100 : 300 }}
-          to={{ height: location.pathname === '/' ? 300 : 100 }}
+          from={{
+            height: location.pathname === '/' ? 100 : 300,
+          }}
+          to={{
+            height: location.pathname === '/' ? 300 : 100,
+          }}
         >
           {styles => (
-            <div style={{ overflow: 'hidden', ...styles }}>
-              <Img fluid={data.file.childImageSharp.fluid}/>
+            <div style={{
+              overflow: 'hidden', ...styles,
+            }}>
+              <Img fluid={data.file.childImageSharp.fluid} fadeIn={false}/>
             </div>
           )}
         </Spring>

@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO ({ description, lang, meta, keywords, title }) {
   return (
     <StaticQuery
       query={detailsQuery}
       render={data => {
+        console.log('seo Data', data)
+        console.log('seo Title', title)
+
         const metaDescription =
           description || data.site.siteMetadata.description
         return (
@@ -54,10 +57,10 @@ function SEO({ description, lang, meta, keywords, title }) {
               .concat(
                 keywords.length > 0
                   ? {
-                      name: `keywords`,
-                      content: keywords.join(`, `),
-                    }
-                  : []
+                    name: `keywords`,
+                    content: keywords.join(`, `),
+                  }
+                  : [],
               )
               .concat(meta)}
           />
@@ -84,13 +87,13 @@ SEO.propTypes = {
 export default SEO
 
 const detailsQuery = graphql`
-  query DefaultSEOQuery {
-    site {
-      siteMetadata {
-        title
-        description
-        author
-      }
+    query DefaultSEOQuery {
+        site {
+            siteMetadata {
+                title
+                description
+                author
+            }
+        }
     }
-  }
 `
