@@ -42,6 +42,13 @@ module.exports = {
         // Add any options here
       },
     },
+    // {
+    //   resolve: 'gatsby-source-pixabay',
+    //   options: {
+    //     key: '11533343-a7db56d5077aed73dc363c83b',
+    //   },
+    // },
+    'gatsby-source-etshop',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-remark`,

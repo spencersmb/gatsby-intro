@@ -6,14 +6,42 @@ import Header from './header'
 import './layout.css'
 import Archive from './archive'
 import { Spring } from 'react-spring/renderprops'
+import { connect } from 'react-redux'
 
 /**
-* Better comments
-* * Green
-* ! Red
-* ? BLue
-* @param test
+ * Better comments
+ * * Green
+ * ! Red
+ * ? BLue
+ * @param test
  */
+
+
+const Counter = ({ count, increment }) => (
+  <div>
+    <p>Count: {count}</p>
+    <button onClick={increment}>Increment</button>
+  </div>
+)
+
+Counter.propTypes = {
+  count: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = ({ count }) => {
+  return { count }
+}
+
+const mapDispatchToProps = dispatch => {
+  return { increment: () => dispatch({ type: `INCREMENT` }) }
+}
+
+const ConnectedCounter = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Counter)
+
 const Layout = ({ children, location = {} }) => (
   <StaticQuery
     query={graphql`
@@ -38,6 +66,7 @@ const Layout = ({ children, location = {} }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title}/>
+        <ConnectedCounter/>
         <Spring
           from={{
             height: location.pathname === '/' ? 100 : 300,
